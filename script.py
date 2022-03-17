@@ -4,8 +4,16 @@ import time
 
 
 def sendmex(state):
-    x = requests.get('http://192.168.1.85/state?sw='+str(state))
-    print(x.text)
+    try:
+        x = requests.get('http://192.168.0.85/state?sw='+str(state))
+        current_time = time.localtime(time.time())
+        print(x.text, "\t", current_time.tm_hour,":", current_time.tm_min)
+        
+    except ConnectionRefusedError as error:
+        print('Connessione rifiutata:\n{}'.format(error))
+
+    except:
+        print('Connessione non riuscita')
 
 while (True):
     connection = pymysql.connect(host="localhost",user="root",passwd="1234",database="dbtime" )
