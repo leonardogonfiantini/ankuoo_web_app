@@ -15,15 +15,17 @@ body {
 
 .button-on-off {
     position:relative;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3rem;
     width: 10rem;
     height: 10rem;
+    display: block;
+    margin:auto;
+    margin-top:4rem;
     background-image: url("../img/power-on.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
+    border:0;
+    background-color: white;
 }
 
 .timer-table {
