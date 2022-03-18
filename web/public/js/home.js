@@ -1,4 +1,4 @@
 var ONOFF = document.getElementById("ONOFF");
-ONOFF.onclick3 = () => {
+ONOFF.onclick = () => {
   console.log("ciao");
 }

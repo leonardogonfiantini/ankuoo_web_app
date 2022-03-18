@@ -5,7 +5,7 @@ import time
 
 def sendmex(state):
     try:
-        x = requests.get('http://192.168.0.85/state?sw='+str(state))
+        x = requests.get('http://192.168.1.85/state?sw='+str(state))
         current_time = time.localtime(time.time())
         print(x.text, "\t", current_time.tm_hour,":", current_time.tm_min)
         
