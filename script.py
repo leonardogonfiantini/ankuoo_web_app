@@ -25,7 +25,7 @@ while (True):
     cursor.execute(timetable)
     rows = cursor.fetchall()
     for i in range(23):
-        for j in range(1,7):
+        for j in range(1,8):
             current_time = time.localtime(time.time())
             hour = current_time.tm_hour
             day = current_time.tm_wday + 1
