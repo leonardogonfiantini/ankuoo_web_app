@@ -44,3 +44,51 @@ ONOFF.onclick = () => {
 
   }
 }
+
+var timer_hour_display = document.getElementById("timer-hour");
+
+var timer_hour_up = document.getElementById("timer-hour-up");
+timer_hour_up.onclick = () => {
+  timer_hour_display.value = parseInt(timer_hour_display.value) + 1;
+}
+
+var timer_hour_down = document.getElementById("timer-hour-down");
+timer_hour_down.onclick = () => {
+  if(timer_hour_display.value != 0) {
+    timer_hour_display.value = parseInt(timer_hour_display.value) - 1;
+  }
+}
+
+var timer_minutes_display = document.getElementById("timer-minutes");
+
+
+var timer_minutes_up = document.getElementById("timer-minutes-up");
+timer_minutes_up.onclick = () => {
+  if(timer_minutes_display.value == 59) {
+    timer_hour_display.value = parseInt(timer_hour_display.value) + 1;
+    timer_minutes_display.value = 0;
+  } else {
+    timer_minutes_display.value = parseInt(timer_minutes_display.value) + 1;
+  }
+}
+
+var timer_minutes_down = document.getElementById("timer-minutes-down");
+timer_minutes_down.onclick = () => {
+  if(timer_minutes_display.value != 0) {
+    timer_minutes_display.value = parseInt(timer_minutes_display.value) - 1;
+  }
+}
+
+var submit_timer = document.getElementById("submit-timer");
+submit_timer.onclick = () => {
+
+  console.log(timer_hour_display.value);
+  console.log(timer_minutes_display.value);
+
+  timer_hour_display.value = 0;
+  timer_minutes_display.value = 0;
+
+}
+
+
+

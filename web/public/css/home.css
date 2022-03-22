@@ -82,3 +82,78 @@ body {
     color: black;
     border: 1px solid red;
 }
+
+
+.set-timer {
+    position: relative;
+    width: 50%;
+    height:20%;
+    border: 2px solid red;
+    margin-left: 30%;
+}
+
+.up-btn {
+    position:relative;
+    margin-left:5vh;
+    width: 8vh;
+    height: 8vh;
+    background-image: url("../img/up.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    border:0;
+    background-color: white;
+}
+
+.down-btn {
+    margin-left:5vh;
+    position:relative;
+    width: 8vh;
+    height: 8vh;
+    background-image: url("../img/down.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    border:0;
+    background-color: white;
+}
+
+.timer-hour {
+    position:relative;
+    margin-right:auto;
+    margin-left:4vh;
+    font-size: xx-large;
+    text-align:center;
+    width: 10vh;
+    height: 10vh;
+    border: 1px solid rgb(207, 202, 202);
+    border-radius:25%;
+
+}
+
+.timer-minutes {
+    border-radius:25%;
+    position:relative;
+    margin-right:auto;
+    margin-left:0vh;
+    border: 1px solid rgb(207, 202, 202);
+    font-size: xx-large;
+    text-align:center;
+    width: 10vh;
+    height: 10vh;
+}
+
+.timer-minutes:focus, .timer-hour:focus {
+    outline: 0;
+}
+
+.colons {
+    position:relative;
+    width: 8vh;
+    height: 8vh;
+    background-image: url("../img/colon.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    border:0;
+}
