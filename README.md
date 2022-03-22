@@ -2,7 +2,7 @@
 The v1.0 of the app is just a simple php matrix with a script in python that do some calc and send the request to ankuoo device.
 
 # install
-To setup the server you have to install, mysql, dbmaria and php, if you have a raspberry, first install bullseye.
+For setup the server you have to install a lampp server, if you have a raspberry install: mysql, dbmaria and php, rebember to install all this libraries you have need the bullseye on rasp.
 
 For making the connection, the device need to be flashed with this firmware: 
 https://drive.google.com/drive/folders/1HWl-QiYM2u8lW9TAv1M6Kr9DPkj1_wRG?usp=sharing
