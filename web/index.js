@@ -21,4 +21,8 @@ app.get('/login', (req, res) => {
 });
 
 
+var api = require('./apidb');
+app.use('/api', api);
+
+
 app.listen(port)
