@@ -3,9 +3,6 @@ require('dotenv').config();
 const app = express();
 const port = 3000;
 
-var MongoClient = require('mongodb').MongoClient;
-var url = process.env.MONGODB_URL;
-
 app.set("view engine", "ejs")
 app.use(express.static('public')); // per renderizzare i css insieme agli ejs
 
@@ -20,6 +17,8 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render("login/login")
+    console.log("ciaoo");
 });
+
 
 app.listen(port)

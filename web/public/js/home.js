@@ -1,3 +1,5 @@
+var url = "mongodb://localhost:27017/";
+
 var ONOFF = document.getElementById("ONOFF");
 let f = 0;
 
@@ -81,6 +83,8 @@ timer_minutes_down.onclick = () => {
 
 var submit_timer = document.getElementById("submit-timer");
 submit_timer.onclick = () => {
+
+  window.location.replace("/login");
 
   console.log(timer_hour_display.value);
   console.log(timer_minutes_display.value);
