@@ -9,14 +9,63 @@ const api = express.Router();
 
 api.use('/timer/insert', function insertTimer(req, res) {
 
-    res.send("timer/insert");
+    var timer = req.query.timer;
+    var status = req.query.status;
+    console.log("New timer insert request: "+timer+" with status: "+status)
+
+    try {
+        var check = timer.split(':');
+
+        if (check.length > 2 || check.length < 1) throw new Error("Timer format not valid");
+
+        if (check[1] > 59) throw new Error("Timer seconds not valid");
+
+        if (timer == null) throw new Error('Timer is null');
+
+    } catch(err) {
+        res.send("ERROR Timer format not correct");
+        throw new Error("Timer format not valid");
+    }
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        console.log("Db connection succesfull");
+
+        obj = {timer: timer, status: "0"};
+
+        dbo.collection("timer").insertOne(obj, function(err, res) {
+            if (err) throw err;
+            console.log("Timer inserted with value: "+timer);
+            db.close();
+        });
+    });
+
+    res.send("OK");
+
+});
+
+api.use('/timer/find_all', function insertTimer(req, res) {
+
+    console.log("New timer find all request")
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        console.log("Db connection succesfull")
+
+        dbo.collection("timer").find({}).toArray(function(err, result) {
+            if (err) throw err;
+            console.log("Timer find_all succesfull")
+            res.send(result)
+            db.close();
+        });
+    });
 
 });
 
 api.use('/timer/delete', function deleteTimer(req, res) {
     res.send("timer/delete");
-
-
 });
 
 api.use('/time_schedule/insert', function insertTimeSchedule(req, res) {
@@ -38,7 +87,7 @@ api.use('/time/insert', function insertTime(req, res) {
 });
 
 api.use('/time/delete', function deleteTime(req, res) {
-    res.send("time/delete");
+    res.send("time/dejjlete");
 
 
 });

@@ -47,17 +47,53 @@ ONOFF.onclick = () => {
   }
 }
 
+function create_object_timer(time, status) {
+  const div = document.createElement("div");
+  div.setAttribute('class', 'form-check form-switch');
+
+  const input = document.createElement('input');
+  input.setAttribute('class', 'form-check-input');
+  input.setAttribute('type', 'checkbox');
+  input.setAttribute('role', 'switch');
+  input.setAttribute('id', 'input'+time);
+
+  const label = document.createElement('label');
+  label.setAttribute('class', 'form-check-label');
+  label.setAttribute('for', 'flexSwitchCheckDefault');
+  label.setAttribute('id', 'label'+time);
+  label.textContent = time;
+
+  div.appendChild(input);
+  div.appendChild(label);
+
+  return div;
+}
+
+$.ajax({
+  url: '/api/timer/find_all',
+  type: "GET",
+  dataType: "json",
+  success: function (data) {
+    console.log(data)
+    var timer_div = document.getElementById('bot-right')
+    for (let i = 0; i < data.length; i++) {
+      timer_div.appendChild(create_object_timer(data[i].timer, data[i].value))
+    }
+  }
+});
+
+
 var timer_hour_display = document.getElementById("timer-hour");
 
 var timer_hour_up = document.getElementById("timer-hour-up");
 timer_hour_up.onclick = () => {
-  timer_hour_display.value = parseInt(timer_hour_display.value) + 1;
+  timer_hour_display.value = ("00"+(parseInt(timer_hour_display.value) + 1)).slice(-2);
 }
 
 var timer_hour_down = document.getElementById("timer-hour-down");
 timer_hour_down.onclick = () => {
   if(timer_hour_display.value != 0) {
-    timer_hour_display.value = parseInt(timer_hour_display.value) - 1;
+    timer_hour_display.value = ("00"+(parseInt(timer_hour_display.value) - 1)).slice(-2);
   }
 }
 
@@ -67,30 +103,36 @@ var timer_minutes_display = document.getElementById("timer-minutes");
 var timer_minutes_up = document.getElementById("timer-minutes-up");
 timer_minutes_up.onclick = () => {
   if(timer_minutes_display.value == 59) {
-    timer_hour_display.value = parseInt(timer_hour_display.value) + 1;
+    timer_hour_display.value = ("00"+(parseInt(timer_hour_display.value) + 1)).slice(-2);
     timer_minutes_display.value = 0;
   } else {
-    timer_minutes_display.value = parseInt(timer_minutes_display.value) + 1;
+    timer_minutes_display.value = ("00"+(parseInt(timer_minutes_display.value) + 1)).slice(-2);
   }
 }
 
 var timer_minutes_down = document.getElementById("timer-minutes-down");
 timer_minutes_down.onclick = () => {
   if(timer_minutes_display.value != 0) {
-    timer_minutes_display.value = parseInt(timer_minutes_display.value) - 1;
+    timer_minutes_display.value = ("00"+(parseInt(timer_minutes_display.value) - 1)).slice(-2);
+  } else {
+    timer_minutes_display.value = 59;
   }
 }
 
 var submit_timer = document.getElementById("submit-timer");
 submit_timer.onclick = () => {
 
-  window.location.replace("/login");
+  var data = timer_hour_display.value+":"+timer_minutes_display.value;
 
-  console.log(timer_hour_display.value);
-  console.log(timer_minutes_display.value);
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    console.log(this.responseText);
+  }
+  xhttp.open("GET", "/api/timer/insert?timer="+data, true);
+  xhttp.send();
 
-  timer_hour_display.value = 0;
-  timer_minutes_display.value = 0;
+  timer_hour_display.value = "00";
+  timer_minutes_display.value = "00";
 
 }
 
