@@ -35,3 +35,19 @@ MongoClient.connect(url, function(err, db) {
     db.close();
   });
 });
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  console.log("Db connection succesfull");
+
+  obj = {status: 0};
+
+  dbo.collection("onoff").insertOne(obj, function(err, res) {
+      if (err) throw err;
+      console.log("OnOff initialized with value 0");
+      db.close();
+  });
+});
+
+
