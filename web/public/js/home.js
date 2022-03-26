@@ -218,43 +218,88 @@ submit_timer.onclick = () => {
 
 }
 
+var from_time_table_hour_display = document.getElementById("from_time_table-hour");
 
-
-var time_table_hour_display = document.getElementById("time_table-hour");
-
-var time_table_hour_up = document.getElementById("time_table-hour-up");
-time_table_hour_up.onclick = () => {
-  time_table_hour_display.value = ("00"+(parseInt(time_table_hour_display.value) + 1)).slice(-2);
-}
-
-var time_table_hour_down = document.getElementById("time_table-hour-down");
-time_table_hour_down.onclick = () => {
-  if(time_table_hour_display.value != 0) {
-    time_table_hour_display.value = ("00"+(parseInt(time_table_hour_display.value) - 1)).slice(-2);
-  }
-}
-
-var time_table_minutes_display = document.getElementById("time_table-minutes");
-
-
-var time_table_minutes_up = document.getElementById("time_table-minutes-up");
-time_table_minutes_up.onclick = () => {
-  if(time_table_minutes_display.value == 59) {
-    time_table_hour_display.value = ("00"+(parseInt(time_table_hour_display.value) + 1)).slice(-2);
-    time_table_minutes_display.value = 0;
+var from_time_table_hour_up = document.getElementById("from_time_table-hour-up");
+from_time_table_hour_up.onclick = () => {
+  if (from_time_table_hour_display.value == 23) {
+    from_time_table_hour_display.value = "00";
   } else {
-    time_table_minutes_display.value = ("00"+(parseInt(time_table_minutes_display.value) + 1)).slice(-2);
+    from_time_table_hour_display.value = ("00"+(parseInt(from_time_table_hour_display.value) + 1)).slice(-2);
   }
 }
 
-var time_table_minutes_down = document.getElementById("time_table-minutes-down");
-time_table_minutes_down.onclick = () => {
-  if(time_table_minutes_display.value != 0) {
-    time_table_minutes_display.value = ("00"+(parseInt(time_table_minutes_display.value) - 1)).slice(-2);
-  } else {
-    time_table_minutes_display.value = 59;
+var from_time_table_hour_down = document.getElementById("from_time_table-hour-down");
+from_time_table_hour_down.onclick = () => {
+  if(from_time_table_hour_display.value != 0) {
+    from_time_table_hour_display.value = ("00"+(parseInt(from_time_table_hour_display.value) - 1)).slice(-2);
   }
 }
+
+var from_time_table_minutes_display = document.getElementById("from_time_table-minutes");
+
+
+var from_time_table_minutes_up = document.getElementById("from_time_table-minutes-up");
+from_time_table_minutes_up.onclick = () => {
+  if(from_time_table_minutes_display.value == 59) {
+    from_time_table_hour_display.value = ("00"+(parseInt(from_time_table_hour_display.value) + 1)).slice(-2);
+    from_time_table_minutes_display.value = "00";
+  } else {
+    from_time_table_minutes_display.value = ("00"+(parseInt(from_time_table_minutes_display.value) + 1)).slice(-2);
+  }
+}
+
+var from_time_table_minutes_down = document.getElementById("from_time_table-minutes-down");
+from_time_table_minutes_down.onclick = () => {
+  if(from_time_table_minutes_display.value != 0) {
+    from_time_table_minutes_display.value = ("00"+(parseInt(from_time_table_minutes_display.value) - 1)).slice(-2);
+  } else {
+    from_time_table_minutes_display.value = 59;
+  }
+}
+
+
+var to_time_table_hour_display = document.getElementById("to_time_table-hour");
+
+var to_time_table_hour_up = document.getElementById("to_time_table-hour-up");
+to_time_table_hour_up.onclick = () => {
+
+  if (to_time_table_hour_display.value == 23) {
+    to_time_table_hour_display.value = "00";
+  } else {
+    to_time_table_hour_display.value = ("00"+(parseInt(to_time_table_hour_display.value) + 1)).slice(-2);
+  }
+}
+
+var to_time_table_hour_down = document.getElementById("to_time_table-hour-down");
+to_time_table_hour_down.onclick = () => {
+  if(to_time_table_hour_display.value != 0) {
+    to_time_table_hour_display.value = ("00"+(parseInt(to_time_table_hour_display.value) - 1)).slice(-2);
+  }
+}
+
+var to_time_table_minutes_display = document.getElementById("to_time_table-minutes");
+
+
+var to_time_table_minutes_up = document.getElementById("to_time_table-minutes-up");
+to_time_table_minutes_up.onclick = () => {
+  if(to_time_table_minutes_display.value == 59) {
+    to_time_table_hour_display.value = ("00"+(parseInt(to_time_table_hour_display.value) + 1)).slice(-2);
+    to_time_table_minutes_display.value = "00";
+  } else {
+    to_time_table_minutes_display.value = ("00"+(parseInt(to_time_table_minutes_display.value) + 1)).slice(-2);
+  }
+}
+
+var to_time_table_minutes_down = document.getElementById("to_time_table-minutes-down");
+to_time_table_minutes_down.onclick = () => {
+  if(to_time_table_minutes_display.value != 0) {
+    to_time_table_minutes_display.value = ("00"+(parseInt(to_time_table_minutes_display.value) - 1)).slice(-2);
+  } else {
+    to_time_table_minutes_display.value = 59;
+  }
+}
+
 
 var buttons_week = document.getElementsByClassName("week-day");
 for (let i = 0; i < buttons_week.length; i++) {
@@ -273,13 +318,111 @@ for (let i = 0; i < buttons_week.length; i++) {
 
 var submit_time_table = document.getElementById("submit-time_table");
 submit_time_table.onclick = () => {
-  var url = "/api/time_schedule/insert?time="+time_table_hour_display.value+":"+time_table_minutes_display.value;
+
+  var from = from_time_table_hour_display.value+":"+from_time_table_minutes_display.value;
+  var to = to_time_table_hour_display.value+":"+to_time_table_minutes_display.value;
+
+  var url = "/api/time_schedule/insert?from="+from+"&to="+to;
   for (let i = 0; i < buttons_week.length; i++) {
     if(buttons_week[i].classList.contains("activate")) {
       url += "&" + buttons_week[i].id + "=1";  
+    } else {
+      url += "&" + buttons_week[i].id + "=0";
     }
   }
 
-
-  console.log(url);
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    console.log(this.responseText);
+  }
+  xhttp.open("GET", url, true);
+  xhttp.send();
 }
+
+
+function create_object_time_schedule(from, to, mon, tue, wed, thu, fri, sat, sun, status) {
+  const div = document.createElement("div");
+  div.setAttribute('class', 'form-check form-switch');
+
+  const input = document.createElement('input');
+  input.setAttribute('class', 'form-check-input');
+  input.setAttribute('type', 'checkbox');
+  input.setAttribute('role', 'switch');
+  input.setAttribute('id', 'input-'+from+"-"+to);
+  input.value = status;
+
+  var days = "days: ";
+
+  if (mon==1) days += "MON/";
+  if (tue==1) days += "TUE/";
+  if (wed==1) days += "WED/";
+  if (thu==1) days += "THU/";
+  if (fri==1) days += "FRI/";
+  if (sun==1) days += "SAT/";
+  if (sat==1) days += "SUN/";
+
+
+  if (status > 0) {
+    input.checked = true;
+  }
+
+  input.onclick = () => {
+
+    if (input.value <= 0) input.value = Date.now();
+    else input.value = 0;
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      console.log(this.responseText);
+    }
+    xhttp.open("GET", "/api/time_schedule/update?from="+from+"&to="+to+"&Mon="+mon+"&Tue="+tue+"&Wed="+wed+"&Thu="+thu+"&Fri="+fri+"%Sat="+sat+"&Sun="+sun+"&status="+input.value, true);
+    xhttp.send();
+
+  }
+
+  const label = document.createElement('label');
+  label.setAttribute('class', 'form-check-label');
+  label.setAttribute('for', 'flexSwitchCheckDefault');
+  label.setAttribute('id', 'label-'+from+"-"+to);
+  label.textContent = from+"/"+to+"    "+days;
+
+  const deletebtn = document.createElement('input');
+  deletebtn.setAttribute('class', 'delete-btn');
+  deletebtn.setAttribute('id', 'delete-'+from+"-"+to);
+  deletebtn.setAttribute('type', 'button');
+
+  deletebtn.onclick = () => {
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      console.log(this.responseText);
+    }
+    xhttp.open("GET", "/api/time_schedule/delete?from="+from+"&to="+to+"&Mon="+mon+"&Tue="+tue+"&Wed="+wed+"&Thu="+thu+"&Fri="+fri+"&Sat="+sat+"&Sun="+sun, true);
+    xhttp.send();
+
+    var maindiv = document.getElementById('botbot');
+    maindiv.removeChild(div);
+
+  }
+
+
+  div.appendChild(input);
+  div.appendChild(label);
+  div.appendChild(deletebtn);
+
+  return div;
+}
+
+
+$.ajax({
+  url: '/api/time_schedule/find_all',
+  type: "GET",
+  dataType: "json",
+  success: function (data) {
+    var time_schedule_div = document.getElementById('botbot')
+    console.log(data)
+    for (let i = 0; i < data.length; i++) {
+      time_schedule_div.appendChild(create_object_time_schedule(data[i].from, data[i].to, data[i].mon, data[i].tue, data[i].wed, data[i].thu, data[i].fri, data[i].sat, data[i].sun, data[i].status))
+    }
+  }
+});
