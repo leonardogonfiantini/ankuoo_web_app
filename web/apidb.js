@@ -229,8 +229,32 @@ api.use('/time_schedule/update', function updateTimeSchedule(req, res) {
 });
 
 api.use('/time_schedule/delete', function deleteTimeSchedule(req, res) {
-    res.send("time_schedule/delete");
 
+    console.log("New time_schedule delete request")
+    
+    var from = req.query.from;
+    var to = req.query.to;
+
+    var mon = req.query.Mon;
+    var tue = req.query.Tue;
+    var wed = req.query.Wed;
+    var thu = req.query.Thu;
+    var fri = req.query.Fri;
+    var sat = req.query.Sat;
+    var sun = req.query.Sun;
+
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("mydb");
+        console.log("Db connection succesfull")
+
+        dbo.collection("timetable").deleteOne({from: from, to: to, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun}, function(err, result) {
+            if (err) throw err;
+            console.log("Time_schedule deleted succesfull")
+            res.send("Time_schedule eliminato")
+            db.close();
+        });
+    });
 
 });
 

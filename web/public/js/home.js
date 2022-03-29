@@ -351,6 +351,10 @@ function create_object_time_schedule(from, to, mon, tue, wed, thu, fri, sat, sun
   input.setAttribute('id', 'input-'+from+"-"+to);
   input.value = status;
 
+  if (input.value == 1) {
+    input.checked = true;
+  }
+
   var days = "days: ";
 
   if (mon==1) days += "MON/";
@@ -366,16 +370,19 @@ function create_object_time_schedule(from, to, mon, tue, wed, thu, fri, sat, sun
     input.checked = true;
   }
 
+
   input.onclick = () => {
 
-    if (input.value <= 0) input.value = Date.now();
+    var urlup = "/api/time_schedule/update?from="+from+"&to="+to+"&Mon="+mon+"&Tue="+tue+"&Wed="+wed+"&Thu="+thu+"&Fri="+fri+"&Sat="+sat+"&Sun="+sun;
+    
+    if (input.value <= 0) input.value = 1;
     else input.value = 0;
 
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
       console.log(this.responseText);
     }
-    xhttp.open("GET", "/api/time_schedule/update?from="+from+"&to="+to+"&Mon="+mon+"&Tue="+tue+"&Wed="+wed+"&Thu="+thu+"&Fri="+fri+"%Sat="+sat+"&Sun="+sun+"&status="+input.value, true);
+    xhttp.open("GET", urlup+"&status="+input.value, true);
     xhttp.send();
 
   }
