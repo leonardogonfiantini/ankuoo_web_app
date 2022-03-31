@@ -21,3 +21,11 @@ You can run the server with this command, the server will run on port 3000, you 
 Remember to change the ip in script.py, in my case i setted the plug with 192.168.1.85, but you can change it.
 
 ----
+
+## In version 3.0
+- Better code, not yandere
+- Delete all bootsrap, i prefer work with css
+- A better layout  with a navbar
+- Maybe an admin panel to check in a more specific way the behaviour of plug
+- I will include Mongodb Atlas
+- Possibly i will use react, so i can recreate it with react native
