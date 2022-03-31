@@ -16,7 +16,9 @@ while (True):
     try:
         connection = pymysql.connect(host="localhost",user="root",passwd="1234",database="dbtime" )
         cursor = connection.cursor()
-
+    except:
+        print("Errore durante la connessione")
+        
         timetable = "Select * from time;"
         timeupdateon = "Update ONOFF set onoff = 1 where id = 0;"
         timeupdateoff = "Update ONOFF set onoff = 0 where id = 0;"
@@ -46,6 +48,4 @@ while (True):
             sendmex(0)
         
         time.sleep(40)
-    except:
-        print("Errore durante lo script")
     
