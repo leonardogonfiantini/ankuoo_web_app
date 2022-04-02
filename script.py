@@ -69,11 +69,12 @@ while (1):
         print('timetable flag: ', flag)
         print('Day: ', current_time.tm_mday, '/', current_time.tm_mon, '/', current_time.tm_year, 
                 '\nTime: ', current_time.tm_hour, ":", current_time.tm_min)
-        time.sleep(60)
         
         sendmex(flag)
+        
     except:
         print("Errore durante lo script")
 
+    time.sleep(60)
 
 
