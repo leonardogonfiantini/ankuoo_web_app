@@ -22,10 +22,4 @@ Remember to change the ip in script.py, in my case i setted the plug with 192.16
 
 ----
 
-## In version 3.0
-- Better code, not yandere
-- Delete all bootsrap, i prefer work with css
-- A better layout  with a navbar
-- Maybe an admin panel to check in a more specific way the behaviour of plug
-- I will include Mongodb Atlas
-- Possibly i will use react, so i can recreate it with react native
+This version has MongoDb Atlas api, so in .env you have to change it with your link.
