@@ -21,5 +21,3 @@ You can run the server with this command, the server will run on port 3000, you 
 Remember to change the ip in script.py, in my case i setted the plug with 192.168.1.85, but you can change it.
 
 ----
-
-This version has MongoDb Atlas api, so in .env you have to change it with your link.
