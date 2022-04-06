@@ -139,7 +139,7 @@ api.use('/time_schedule/insert', function insertTimeSchedule(req, res) {
         client.connect(err => {
 
             const collection = client.db("V25").collection("TimeTable"); 
-            obj = {from: from, to: to, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun, status: 0};
+            obj = {from: from, to: to, mon: mon, tue: tue, wed: wed, thu: thu, fri: fri, sat: sat, sun: sun, status: "0"};
            
             collection.insertOne(obj, function(err, res) {
                 if (err) throw err;

@@ -78,6 +78,7 @@ while (1):
                 '\nTime: ', current_time.tm_hour, ":", current_time.tm_min)
         
         
+        client.close()
         sendmex(flag)
         
     except:
