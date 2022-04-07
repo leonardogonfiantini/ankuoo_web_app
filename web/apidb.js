@@ -54,7 +54,7 @@ api.use('/timer/find_all', function findallTimer(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
+    }
 
     client.close();
 });
