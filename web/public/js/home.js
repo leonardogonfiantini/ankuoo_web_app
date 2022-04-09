@@ -335,11 +335,11 @@ submit_time_table.onclick = () => {
   xhttp.onload = function() {
     console.log(this.responseText);
   }
-  xhttp.open("GET", url, true);
+  xhttp.open("GET", url+"&status=0", true);
   xhttp.send();
 
   var timer_div = document.getElementById('botbot');
-  timer_div.appendChild(create_object_time_schedule(from, to, buttons_week[0], buttons_week[1], buttons_week[2], buttons_week[3], buttons_week[4], buttons_week[5], buttons_week[6], 0));
+  timer_div.appendChild(create_object_time_schedule(from, to, buttons_week[0], buttons_week[1], buttons_week[2], buttons_week[3], buttons_week[4], buttons_week[5], buttons_week[6], "0"));
 
 }
 

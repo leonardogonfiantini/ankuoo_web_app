@@ -1,7 +1,14 @@
 import requests
-import time
-import pymongo
+
 import calendar
+import time
+
+import pymongo
+from pymongo.server_api import ServerApi
+
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 def sendmex(state):
     try:
@@ -19,15 +26,15 @@ def sendmex(state):
 while (1):
     
     try:
-        client = pymongo.MongoClient("mongodb://localhost:27017/")
-        db = client['mydb']
+        client = pymongo.MongoClient(os.getenv('MONGODB_URL'), server_api=ServerApi('1'))
+        db = client['V25']
         
         flag = 0;
         current_epoch = int(time.time())
 
 
         #onoff
-        col = db['onoff']
+        col = db['OnOff']
         x = col.find_one()
         if (int(x['status']) > 0):
             flag = 1
@@ -35,7 +42,7 @@ while (1):
         print('onoff flag: ', flag)
 
         #timer
-        col = db['timer']
+        col = db['Timer']
         
         for x in col.find({ "status": { "$ne": "0"} } ):
             timer = x['timer']
@@ -54,7 +61,7 @@ while (1):
 
         #timetable
         current_time = time.localtime(time.time())
-        col = db['timetable']
+        col = db['TimeTable']
 
         for x in col.find({ "status": { "$ne": "0"} } ):
             wday = calendar.day_name[current_time.tm_wday][:3].lower()  #maybe with a better db project....
@@ -69,11 +76,14 @@ while (1):
         print('timetable flag: ', flag)
         print('Day: ', current_time.tm_mday, '/', current_time.tm_mon, '/', current_time.tm_year, 
                 '\nTime: ', current_time.tm_hour, ":", current_time.tm_min)
-        time.sleep(60)
         
+        
+        client.close()
         sendmex(flag)
+        
     except:
         print("Errore durante lo script")
 
+    time.sleep(60)
 
 
