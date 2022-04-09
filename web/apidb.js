@@ -5,7 +5,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 var uri = process.env.MONGODB_URL; 
 const api = express.Router();  
 
-api.use('/timer/insert', function insertTimer(req, res) {      
+api.use('/timer/insert', async function insertTimer(req, res) {      
     
     var timer = req.query.timer;     
     var status = req.query.status;     
@@ -27,14 +27,14 @@ api.use('/timer/insert', function insertTimer(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
     
     res.send("OK");  
 });
 
-api.use('/timer/find_all', function findallTimer(req, res) {
+api.use('/timer/find_all', async function findallTimer(req, res) {
 
     console.log("New timer find all request")
 
@@ -54,12 +54,12 @@ api.use('/timer/find_all', function findallTimer(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 });
 
-api.use('/timer/delete', function deleteTimer(req, res) {
+api.use('/timer/delete', async function deleteTimer(req, res) {
     
     console.log("New timer delete request")
 
@@ -80,12 +80,12 @@ api.use('/timer/delete', function deleteTimer(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    }  
 });
 
-api.use('/timer/update', function updateTimer(req, res) {
+api.use('/timer/update', async function updateTimer(req, res) {
     
     console.log("New timer update request")
 
@@ -109,14 +109,14 @@ api.use('/timer/update', function updateTimer(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    }  finally {
+        await client.close();
+    } 
 });
 
 
 
-api.use('/time_schedule/insert', function insertTimeSchedule(req, res) {
+api.use('/time_schedule/insert', async function insertTimeSchedule(req, res) {
     
     var from = req.query.from;
     var to = req.query.to;
@@ -149,14 +149,14 @@ api.use('/time_schedule/insert', function insertTimeSchedule(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 
     res.send("OK");
 });
 
-api.use('/time_schedule/find_all', function findallTimeSchedule(req, res) {
+api.use('/time_schedule/find_all',  async function findallTimeSchedule(req, res) {
 
     var from = req.query.from;
     var to = req.query.to;
@@ -188,13 +188,13 @@ api.use('/time_schedule/find_all', function findallTimeSchedule(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 
 }); 
 
-api.use('/time_schedule/update', function updateTimeSchedule(req, res) {
+api.use('/time_schedule/update', async function updateTimeSchedule(req, res) {
     var from = req.query.from;
     var to = req.query.to;
 
@@ -223,13 +223,13 @@ api.use('/time_schedule/update', function updateTimeSchedule(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 
 });
 
-api.use('/time_schedule/delete', function deleteTimeSchedule(req, res) {
+api.use('/time_schedule/delete', async function deleteTimeSchedule(req, res) {
 
     console.log("New time_schedule delete request")
     
@@ -260,13 +260,13 @@ api.use('/time_schedule/delete', function deleteTimeSchedule(req, res) {
         }); 
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 
 });
 
-api.use('/onoff/update', function updateOnOff(req, res) {
+api.use('/onoff/update', async function updateOnOff(req, res) {
     var status = req.query.status;
 
     const client =  new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });         
@@ -285,14 +285,14 @@ api.use('/onoff/update', function updateOnOff(req, res) {
         });        
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 
 });
 
 
-api.use('/onoff/find', function findOnOff(req, res) {
+api.use('/onoff/find', async function findOnOff(req, res) {
     console.log("New Onoff find request")
 
     const client =  new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });         
@@ -310,9 +310,9 @@ api.use('/onoff/find', function findOnOff(req, res) {
         });        
     } catch (e) {
         console.error(e);
-    }   
-
-    client.close();
+    } finally {
+        await client.close();
+    } 
 });
 
 module.exports = api;
