@@ -33,23 +33,4 @@ $main-color: hsl(297, 83%, 16%);
 
 .item2 {
     background-color: white;
-    z-index: 1;
-
-
-    &::before {
-        content: '';
-        background-color: $main-color;
-
-        width: 0;
-        height: 0;
-
-        border-top: 20px solid green;
-        //border-bottom: 20px solid yellow;
-        border-left: 20px solid blue;
-        border-right: 20px solid red;
-
-        //border-top-left-radius: 50%;
-        //border-bottom-right-radius: 50%;
-
-    }
 }
