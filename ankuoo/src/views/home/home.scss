@@ -29,8 +29,90 @@ $main-color: hsl(297, 83%, 16%);
     'onoff onoff'
     'stats stats'
     'stats stats';
+
+    .timer {display: none}
+    .schedule {display: none;}
+    .stats {display: none;}
+
+}
+
+@media only screen and (min-width: 1000px) {
+    
+    .onoff { grid-area: onoff; }
+    .timer { grid-area: timer; }
+    .schedule { grid-area: schedule; }
+    .stats { grid-area: stats; }
+    
+    
+    .home {
+
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+
+        grid-template-areas:
+        'stats stats onoff onoff'
+        'stats stats onoff onoff'
+        'stats stats timer timer'
+        'stats stats timer timer'
+        'stats stats schedule schedule'
+        'stats stats schedule schedule';
+    }
+
+    .home {
+        .timer { display: block; }
+        .schedule { display: block; }
+        .stats { display: block; }
+        .item2 {display: none;}
+    }
 }
 
 .item2 {
+    width: 100%;
+    height: max-height;
+    
+    border-radius: 10% 10% 0 0;
+
     background-color: white;
+
+
+    .navbar {
+        display: block;
+
+        width: 80%;
+        height: 3rem;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        background-color: white;
+
+
+        ul, li {
+            position: relative;
+            display: inline-flex;
+            list-style: none;
+            
+            margin-left: auto;
+            margin-right: auto;
+            
+            button {
+                padding: 15px;
+                border: 0;
+
+                background-color: white;
+                overflow: hidden;
+            }
+
+            .active, button:hover {
+                color: $main-color;
+            }
+
+            .active {
+                border-bottom: 3px solid $main-color;
+            }
+
+        }
+
+    }
+
 }
