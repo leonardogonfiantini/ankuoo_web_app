@@ -30,8 +30,8 @@ $main-color: hsl(297, 83%, 16%);
     'stats stats'
     'stats stats';
 
-    .timer {display: none}
-    .schedule {display: none;}
+    .timers {display: none}
+    .schedules {display: none;}
     .stats {display: none;}
 
 }
@@ -39,8 +39,8 @@ $main-color: hsl(297, 83%, 16%);
 @media only screen and (min-width: 1000px) {
     
     .onoff { grid-area: onoff; }
-    .timer { grid-area: timer; }
-    .schedule { grid-area: schedule; }
+    .timers { grid-area: timers; }
+    .schedules { grid-area: schedules; }
     .stats { grid-area: stats; }
     
     
@@ -52,40 +52,46 @@ $main-color: hsl(297, 83%, 16%);
         grid-template-areas:
         'stats stats onoff onoff'
         'stats stats onoff onoff'
-        'stats stats timer timer'
-        'stats stats timer timer'
-        'stats stats schedule schedule'
-        'stats stats schedule schedule';
+        'stats stats timers timers'
+        'stats stats timers timers'
+        'stats stats schedules schedules'
+        'stats stats schedules schedules';
     }
 
     .home {
         
-        .timer { display: block; }
-        .schedule { display: block; }
+        .timers { display: block; }
+        .schedules { display: block; }
         .stats { display: block; }
         .item2 { display: none; }
     }
 }
 
+.item1 {
+    width: 100%;
+    height: 30vh;
+}
+
 .item2 {
     width: 100%;
-    height: max-height;
+    height: 70vh;
     
-    border-radius: 10% 10% 0 0;
+    border-radius: 9% 9% 0 0;
 
     background-color: white;
 
+    box-shadow: 0 0 20px black;
 
     .navbar {
         display: block;
 
         width: 80%;
-        height: 3rem;
+        height: 4rem;
 
         margin-left: auto;
         margin-right: auto;
 
-        background-color: white;
+        background-color: transparent;
 
 
         ul, li {
@@ -102,6 +108,8 @@ $main-color: hsl(297, 83%, 16%);
 
                 background-color: white;
                 overflow: hidden;
+
+                font-size: 1.01em;
             }
 
             .active, button:hover {

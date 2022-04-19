@@ -12,12 +12,16 @@ function Home() {
   function buttonStatus(e, wName) {
     
     var active = document.querySelector('.active')
-    active.classList.remove('active')
+    if(active != null) active.classList.remove('active')
   
     e.target.classList.add('active')
 
-    var widgets = document.getElementById('widgets')
+    widgetShow(wName);
+  }
+
+  function widgetShow(wName) {
     
+    var widgets = document.getElementById('widgets')
     var obj_active = document.querySelector('.objactive')
     if (obj_active != null) {
       obj_active.style.display = 'none'
@@ -29,20 +33,13 @@ function Home() {
     obj.style.display = 'block';
     obj.classList.add('objactive')
     item2.appendChild(obj)
-
   }
 
-  function timerClick(e) {
-    buttonStatus(e, 'timer');
-  }
+  function timerClick(e) {buttonStatus(e, 'timers');}
+  function scheduleClick(e) {buttonStatus(e, 'schedules');}
+  function statsClick(e) {buttonStatus(e, 'stats');}
 
-  function scheduleClick(e) {
-    buttonStatus(e, 'schedule');
-  }
-
-  function statsClick(e) {
-    buttonStatus(e, 'stats');
-  }
+  document.addEventListener('readystatechange', event => { widgetShow('timers')});
 
   return (
     <div className='home'>
@@ -59,9 +56,9 @@ function Home() {
         </div>  
 
 
-        <div id='schedule' className='schedule'> <Schedule /> </div>
+        <div id='schedules' className='schedules'> <Schedule /> </div>
         <div id='stats' className='stats'> <Stats /> </div>
-        <div id='timer' className='timer'> <Timer /> </div>  
+        <div id='timers' className='timers'> <Timer /> </div>  
 
         <div id='widgets' className="widgets"> </div>
     </div>
