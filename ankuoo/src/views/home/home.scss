@@ -59,10 +59,11 @@ $main-color: hsl(297, 83%, 16%);
     }
 
     .home {
+        
         .timer { display: block; }
         .schedule { display: block; }
         .stats { display: block; }
-        .item2 {display: none;}
+        .item2 { display: none; }
     }
 }
 
@@ -114,5 +115,6 @@ $main-color: hsl(297, 83%, 16%);
         }
 
     }
+
 
 }

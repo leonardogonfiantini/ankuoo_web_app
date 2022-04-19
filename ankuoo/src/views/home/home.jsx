@@ -1,68 +1,52 @@
 import React from 'react'
-import OnOff from '../../components/onoff/onoff'
 
 import './home.scss'
 
+import OnOff from '../../components/onoff/onoff'
 import Schedule from '../../components/schedule/schedule'
 import Stats from '../../components/stats/stats'
 import Timer from '../../components/timer/timer'
 
 function Home() {
 
-
-  function timerClick(e) {
+  function buttonStatus(e, wName) {
+    
     var active = document.querySelector('.active')
     active.classList.remove('active')
   
     e.target.classList.add('active')
 
-    var obj = document.getElementById('timer')
-    obj.style.display = 'block';
-    obj.classList.add('obj-active')
-
+    var widgets = document.getElementById('widgets')
+    
+    var obj_active = document.querySelector('.objactive')
+    if (obj_active != null) {
+      obj_active.style.display = 'none'
+      widgets.appendChild(obj_active)
+    }
 
     var item2 = document.getElementById('item2')
-    var obj_active = document.getElementsByClassName('obj-active')
+    var obj = document.getElementById(wName)
+    obj.style.display = 'block';
+    obj.classList.add('objactive')
     item2.appendChild(obj)
+
+  }
+
+  function timerClick(e) {
+    buttonStatus(e, 'timer');
   }
 
   function scheduleClick(e) {
-    var active = document.querySelector('.active')
-    active.classList.remove('active')  
-    
-    e.target.classList.add('active')
-
-    var obj = document.getElementById('schedule')
-    obj.style.display = 'block';
-    obj.classList.add('obj-active')
-
-
-    var item2 = document.getElementById('item2')
-    var obj_active = document.getElementsByClassName('obj-active')
-    item2.appendChild(obj)
+    buttonStatus(e, 'schedule');
   }
 
   function statsClick(e) {
-    var active = document.querySelector('.active')
-    active.classList.remove('active')
-
-    e.target.classList.add('active')
-
-    var obj = document.getElementById('stats')
-    obj.style.display = 'block'
-    obj.classList.add('obj-active')
-
-    var item2 = document.getElementById('item2')
-    var obj_active = document.getElementsByClassName('obj-active')
-    item2.appendChild(obj)
+    buttonStatus(e, 'stats');
   }
-
 
   return (
     <div className='home'>
-        <div className='item1 onoff' > 
-            <OnOff />
-        </div>   
+        <div className='item1 onoff' > <OnOff /> </div>   
 
         <div id='item2' className='item2'>
           <div className='navbar'> 
@@ -74,11 +58,12 @@ function Home() {
           </div>
         </div>  
 
-        <div className="widgets">
-          <div id='schedule' className='schedule'> <Schedule /> </div>
-          <div id='stats' className='stats'> <Stats /> </div>
-          <div id='timer' className='timer'> <Timer /> </div>  
-        </div>
+
+        <div id='schedule' className='schedule'> <Schedule /> </div>
+        <div id='stats' className='stats'> <Stats /> </div>
+        <div id='timer' className='timer'> <Timer /> </div>  
+
+        <div id='widgets' className="widgets"> </div>
     </div>
   )
 
