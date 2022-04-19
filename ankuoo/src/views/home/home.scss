@@ -36,7 +36,7 @@ $main-color: hsl(297, 83%, 16%);
 
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 900px) {
     
     .onoff { grid-area: onoff; }
     .timers { grid-area: timers; }
@@ -63,13 +63,20 @@ $main-color: hsl(297, 83%, 16%);
         .timers { display: block; }
         .schedules { display: block; }
         .stats { display: block; }
+        
         .item2 { display: none; }
+        .widgets{ display: none; }
     }
 }
 
 .item1 {
     width: 100%;
     height: 30vh;
+
+    @media screen and (min-width: 900px) {
+        box-shadow: 4px 4px 5px black;
+        border: 2px solid black;
+    }
 }
 
 .item2 {
@@ -85,7 +92,9 @@ $main-color: hsl(297, 83%, 16%);
     .navbar {
         display: block;
 
-        width: 80%;
+        position: relative;
+
+        width: 18rem;
         height: 4rem;
 
         margin-left: auto;
@@ -99,12 +108,15 @@ $main-color: hsl(297, 83%, 16%);
             display: inline-flex;
             list-style: none;
             
-            margin-left: auto;
-            margin-right: auto;
-            
+
+
             button {
+                position: relative;
+
                 padding: 15px;
                 border: 0;
+                
+                left: -20px;
 
                 background-color: white;
                 overflow: hidden;

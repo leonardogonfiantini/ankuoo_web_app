@@ -39,7 +39,9 @@ function Home() {
   function scheduleClick(e) {buttonStatus(e, 'schedules');}
   function statsClick(e) {buttonStatus(e, 'stats');}
 
-  document.addEventListener('readystatechange', event => { widgetShow('timers')});
+  if (window.innerWidth <= 900) {
+      document.addEventListener('DOMContentLoaded', function(){ widgetShow('timers')}, false);
+  }
 
   return (
     <div className='home'>
