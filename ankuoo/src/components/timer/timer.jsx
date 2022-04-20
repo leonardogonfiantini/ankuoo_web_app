@@ -3,23 +3,30 @@ import React from 'react'
 import './timer.scss'
 
 import plusBtn from './plus-button.png'
-
+import closeModal from './cross.png'
 
 function Timer() {
 
-  function createTimer() {
-    var modal = document.querySelector('#modal')
+  function openModalTimer() {
+    var modal = document.querySelector('#modal-timer')
     modal.classList.add('active')
+  }
+
+  function closeModalTimer() {
+    var modal = document.querySelector('#modal-timer')
+    modal.classList.remove('active')
   }
 
   return (
     <div className='timer'>
       <div className="timer-create">
-        <img src={plusBtn} onClick={createTimer}/>
+        <img src={plusBtn} onClick={openModalTimer}/>
 
-        <div id="modal" className="modal">
+        <div id="modal-timer" className="modal">
           <div className="modal-content">
-            <p> Ciao mondo </p>
+            <h2> Create timer </h2>
+            <img src={closeModal} id='close-modal-timer' className='close-modal' onClick={closeModalTimer}/>
+            <button className='create-button'> Create </button>
           </div>
         </div>
 

@@ -38,12 +38,12 @@ $main-color: hsl(297, 83%, 16%);
 
         position: relative;
         margin-top: 0.5rem;
-        margin-left: 1rem;
 
         img {
             width: 2.2rem;
             height: 2.2rem;
-
+            margin-left: 1rem;
+            
             border-radius: 50%;
         }
 
@@ -62,7 +62,7 @@ $main-color: hsl(297, 83%, 16%);
             transform: translate(-50%, -50%);
 
             width: 20rem;
-            height: 20rem;
+            height: 30rem;
 
             
             transition: ease-in;
@@ -70,8 +70,49 @@ $main-color: hsl(297, 83%, 16%);
 
             background-color: white;
             border: 1px solid black;
-            border-radius: 1.5rem;
+            border-radius: 1rem;
             z-index: 4;
+
+            text-align: center;
+
+            h2 {
+                position: relative;
+                margin-top: 1rem;
+                margin-left: auto;
+                margin-right: auto;
+
+                color: $main-color;
+            }
+
+            .close-modal {
+                position: absolute;
+
+                width: 2.5rem;
+                height: 2.5rem;
+
+                right: 1rem;
+                top: 1rem;
+                
+            }
+
+            .create-button {
+                position: absolute;
+
+                bottom: 1rem;
+                right: 1rem;
+
+                width: 5rem;
+                height: 2.3rem;
+
+                background-color: $main-color;
+                
+                font-size: 1em;
+                color: white;
+
+                border: 0;
+                border-radius: 0.2rem;
+        
+            }
 
         }
 
