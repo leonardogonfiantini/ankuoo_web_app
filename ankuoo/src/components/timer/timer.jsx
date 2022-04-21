@@ -1,6 +1,8 @@
 import React, { useState} from 'react'
 
 import './timer.scss'
+  
+import TimerRow from '../TimerRow/TimerRow'
 
 import plusBtn from './images/plus-button.png'
 import closeModal from './images/cross.png'
@@ -61,26 +63,26 @@ function Timer() {
   return (
     <div className='timer'>
       <div className="timer-create">
-        <img src={plusBtn} onClick={openModalTimer}/>
+        <img src={plusBtn} onClick={openModalTimer} alt="open modal" />
 
         <div id="modal-timer" className="modal">
           <div className="modal-content">
             <h2> Create timer </h2>
-            <img src={closeModal} id='close-modal-timer' className='close-modal' onClick={closeModalTimer}/>
+            <img src={closeModal} id='close-modal-timer' className='close-modal' onClick={closeModalTimer} alt="close modal" />
 
             <div className="set-timer">
               <div className="hour">
-                <img className="up" src={upBtn} onClick={upHour} />
+                <img className="up" src={upBtn} onClick={upHour} alt="up arrow hour" />
                 <p> {hour} </p>
-                <img className="down" src={downBtn} onClick={downHour} />
+                <img className="down" src={downBtn} onClick={downHour} alt="down arrow hour" />
               </div>
 
-              <img className="dotdot" src={dotdot} />
+              <img className="dotdot" src={dotdot} alt="dotdot"/>
 
               <div className="minutes">
-                <img className="up" src={upBtn} onClick={upMinute} />
+                <img className="up" src={upBtn} onClick={upMinute} alt="up arrow minutes" />
                 <p> {minute} </p>
-                <img className="down" src={downBtn} onClick={downMinute} />
+                <img className="down" src={downBtn} onClick={downMinute} alt="down arrow minutes" />
               </div>
             </div>
 
@@ -91,18 +93,23 @@ function Timer() {
       </div>
 
       <div className="timer-rows">
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/> 
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-        timer row -------------------------- <br/>
-
+        <ul>
+          <li>
+            <TimerRow></TimerRow>
+          </li>
+          <li>
+            <TimerRow></TimerRow>
+          </li>
+          <li>
+            <TimerRow></TimerRow>
+          </li>
+          <li>
+            <TimerRow></TimerRow>
+          </li>
+          <li>
+            <TimerRow></TimerRow>
+          </li>
+        </ul>
       </div>
     </div>
   )

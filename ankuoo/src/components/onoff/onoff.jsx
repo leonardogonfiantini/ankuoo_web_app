@@ -66,7 +66,7 @@ function OnOff() {
 
   return (
     <div className='onoff'>
-      <img src={button_status} id='button-img' onClick={buttonSetStatus}/> 
+      <img src={button_status} id='button-img' onClick={buttonSetStatus} alt="onoff button" /> 
       <p id="timer-text"> {timer} </p> 
     </div>
   )
