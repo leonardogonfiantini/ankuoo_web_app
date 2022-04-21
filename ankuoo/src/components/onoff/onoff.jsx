@@ -10,7 +10,7 @@ function OnOff() {
 
   function buttonSetStatus(e) {
 
-    if (status == 0) {
+    if (status === 0) {
       e.target.setAttribute('src', button_off)
       setStatus(status + 1);
       startTimer();
@@ -27,7 +27,7 @@ function OnOff() {
 
   const [timer, setTimer] = useState('00:00:00')
 
-  function startTimer(oldtime) {  
+  function startTimer() {  
 
     var oldtime = new Date().getTime();
 
@@ -57,12 +57,12 @@ function OnOff() {
   }
 
   useEffect(() => {
-      if (timer != "00:00:00")
+      if (timer !== "00:00:00")
         clearTimer()
-  }, []);
+  });
 
   var button_status = button_off;
-  if (status == 1) button_status = button_on
+  if (status === 1) button_status = button_on
 
   return (
     <div className='onoff'>

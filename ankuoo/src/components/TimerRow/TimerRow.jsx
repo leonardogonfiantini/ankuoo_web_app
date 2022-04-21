@@ -6,9 +6,9 @@ function TimerRow() {
   return (
     <div className='TimerRow'>
 
-        <label class="switch">
+        <label className="switch">
         <input type="checkbox"/>
-        <span class="slider round"/>
+        <span className="slider round"/>
         </label>
 
         <p className='time'> 20:34 </p>
