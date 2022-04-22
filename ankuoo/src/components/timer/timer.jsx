@@ -60,6 +60,17 @@ function Timer() {
     }
   }
 
+
+  const [timers, setTimers] = useState([])
+  const [id, setId] = useState(0)
+
+  function CreateTimer() {
+    setTimers(
+      [...timers, <TimerRow key={id} id={id} time={hour + ':' + minute} /> ]
+    )
+    setId(id + 1)
+  }
+
   return (
     <div className='timer'>
       <div className="timer-create">
@@ -86,30 +97,14 @@ function Timer() {
               </div>
             </div>
 
-            <button className='create-button'> Create </button>
+            <button className='create-button' onClick={CreateTimer}> Create </button>
           </div>
         </div>
 
       </div>
 
-      <div className="timer-rows">
-        <ul>
-          <li>
-            <TimerRow></TimerRow>
-          </li>
-          <li>
-            <TimerRow></TimerRow>
-          </li>
-          <li>
-            <TimerRow></TimerRow>
-          </li>
-          <li>
-            <TimerRow></TimerRow>
-          </li>
-          <li>
-            <TimerRow></TimerRow>
-          </li>
-        </ul>
+      <div id="timer-rows" className="timer-rows">
+          {timers}
       </div>
     </div>
   )

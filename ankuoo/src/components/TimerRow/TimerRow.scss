@@ -1,4 +1,6 @@
 .TimerRow {
+    
+
     $main-color: hsl(295, 89%, 22%);
 
     display: flex;
@@ -11,6 +13,16 @@
     
     .time {
         margin-left: 1rem;
+    }
+
+    img {
+        position: relative;
+
+        width: 1.8rem;
+        height: 1.8rem;
+
+        left: 20px;
+        bottom: 4px;
     }
 
     .switch {

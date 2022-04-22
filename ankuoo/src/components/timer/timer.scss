@@ -170,13 +170,18 @@ $main-color: hsl(295, 89%, 22%);
     .timer-rows {
 
         position: relative;
+
         width: 95%;
-        height: 70%;
+        height:  22rem;
 
         margin-top: 0.5rem;
         margin-left: 1rem;
 
         overflow-y: auto;
-        
+
+        @media screen and (min-width: 1000px) {
+            height: 8rem;
+        }
+
     }
 }
