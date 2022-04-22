@@ -2,8 +2,8 @@ import React from 'react'
 
 import './ScheduleRow.scss'
 
-import deleteBtn from './delete.png'
-import calendar from './calendar.png'
+import deleteBtn from './images/delete.png'
+import calendar from './images/calendar.png'
 
 function ScheduleRow() {
   return (
