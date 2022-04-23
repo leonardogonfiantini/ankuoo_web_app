@@ -136,14 +136,15 @@ $main-color: hsl(295, 89%, 22%);
                     position: absolute;
 
                     top: 2rem;
-                    left: 5.5rem;
+                    left: 3.5rem;
+
+                    font-size: 1.5em;
 
                     color: $main-color
                 }
 
                 .hour, .minutes {
                     position: absolute;
-                    margin: auto;
 
                     margin-top: 4rem;
 
@@ -154,16 +155,16 @@ $main-color: hsl(295, 89%, 22%);
 
                     p {
                         font-size: 2em;
-                        margin-left: 3.45rem;
+                        margin-left: 0.9rem;
                     }
 
                     .up, .down {
-                        margin-left: 3rem;
+                        margin-left: 0.5rem;
                     }
                 }
 
                 .minutes {
-                    margin-left: 4rem;
+                    margin-left: 6rem;
                 }
 
                 .dotdot {
@@ -173,18 +174,18 @@ $main-color: hsl(295, 89%, 22%);
                     position: absolute;
                     top: 7.5rem;
 
-                    left: 4.5rem;
+                    left: 3.1rem;
                 }
 
                 .to {
-                    margin-left: 10rem;
+                    margin-left: 12.5rem;
 
                     .dotdot {
-                        left: 14.5rem;
+                        left: 15.5rem;
                     }
 
                     .title {
-                        left: 16rem;
+                        left: 17rem;
                     }
                 }
 

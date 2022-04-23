@@ -23,41 +23,100 @@ function Schedule() {
     modal.classList.remove('active')
   }
 
-  const [hour, setHour] = useState('00')
-  const [minute, setMinute] = useState('00')
+  const [FromHour, setFromHour] = useState('00')
+  const [FromMinute, setFromMinute] = useState('00')
 
-  function upHour() {
-    var hours = parseInt(hour) + 1;
+  function upFromHour() {
+    var hours = parseInt(FromHour) + 1;
+
     if (hours <= 9) hours = '0' + hours
-    setHour(hours)
+    if (hours === 24) hours = '00'
+    setFromHour(hours)
+    
+    if (FromHour >= ToHour) upToHour()
+    if (FromHour > ToHour) setToHour(parseInt(FromHour) + 1 === 24 ? '00' : ('0' + parseInt(FromHour) + 1).slice(-2))
   }
 
-  function downHour() {
-    if (hour > 0) {
-      var hours = parseInt(hour) - 1;
+  function downFromHour() {
+
+      if (FromHour > 0) {
+        var hours = parseInt(FromHour) - 1;
+        if (hours <= 9) hours = '0' + hours
+        setFromHour(hours)
+      } else {
+        setFromHour('23')
+      }
+  }
+
+  function upFromMinute() {
+
+    if (FromHour === ToHour) {
+      if (FromMinute+1 > ToMinute) setToMinute(parseInt(FromMinute)+1 === 60 ? '00' : ('0' + (parseInt(FromMinute) + 1)).slice(-2))
+    }
+
+    if (FromMinute < 59) {
+      var minutes = parseInt(FromMinute) + 1;
+      if (minutes <= 9) minutes = '0' + minutes
+      setFromMinute(minutes)
+    } else {
+      upFromHour()
+      setFromMinute('00')
+    }
+  }
+
+  function downFromMinute() {
+    if (FromMinute > 0) {
+      var minutes = parseInt(FromMinute) - 1;
+      if (minutes <= 9) minutes = '0' + minutes
+      setFromMinute(minutes)
+    } else {
+      setFromMinute('59')
+    }
+  }
+
+  const [ToHour, setToHour] = useState('00')
+  const [ToMinute, setToMinute] = useState('00')
+
+  function upToHour() {
+    var hours = parseInt(ToHour) + 1;
+    hours = hours === 24 ? 0 : hours
+    if (hours < FromHour) 
+      hours = FromHour
+    else {
+        if (hours <= 9) hours = '0' + hours
+        if (hours >= 24) hours = '00'
+    }
+    setToHour(hours)
+  }
+
+  function downToHour() {
+    if (ToHour > 0 && ToHour > FromHour) {
+      var hours = parseInt(ToHour) - 1;
       if (hours <= 9) hours = '0' + hours
-      setHour(hours)
+      setToHour(hours)
+    } else {
+      setToHour('23')
     }
   }
 
-  function upMinute() {
-    if (minute < 59) {
-      var minutes = parseInt(minute) + 1;
+  function upToMinute() {
+    if (ToMinute < 59) {
+      var minutes = parseInt(ToMinute) + 1;
       if (minutes <= 9) minutes = '0' + minutes
-      setMinute(minutes)
+      setToMinute(minutes)
     } else {
-      upHour()
-      setMinute('00')
+      upToHour()
+      setToMinute('00')
     }
   }
 
-  function downMinute() {
-    if (minute > 0) {
-      var minutes = parseInt(minute) - 1;
+  function downToMinute() {
+    if (ToMinute > 0) {
+      var minutes = parseInt(ToMinute) - 1;
       if (minutes <= 9) minutes = '0' + minutes
-      setMinute(minutes)
+      setToMinute(minutes)
     } else {
-      setMinute('59')
+      setToMinute('59')
     }
   }
 
@@ -65,12 +124,12 @@ function Schedule() {
   const [schedules, setSchedules] = useState([])
   const [id, setId] = useState(0)
 
-  function CreateSchedule() {
+  /*function CreateSchedule() {
     setSchedules(
       [...schedules, <ScheduleRow key={id} id={id} time={hour + ':' + minute} /> ]
     )
     setId(id + 1)
-  }
+  }*/
 
   return (
     <div className='schedule'>
@@ -87,46 +146,45 @@ function Schedule() {
               <div className='from'>
                 <h3 className='title'> From </h3> 
                 <div className="hour">
-                  <img className="up" src={upBtn} onClick={upHour} alt="up arrow hour" />
-                  <p> {hour} </p>
-                  <img className="down" src={downBtn} onClick={downHour} alt="down arrow hour" />
+                  <img className="up" src={upBtn} onClick={upFromHour} alt="up arrow hour" />
+                  <p> {FromHour} </p>
+                  <img className="down" src={downBtn} onClick={downFromHour} alt="down arrow hour" />
                 </div>
 
                 <img className="dotdot" src={dotdot} alt="dotdot"/>
 
                 <div className="minutes">
-                  <img className="up" src={upBtn} onClick={upMinute} alt="up arrow minutes" />
-                  <p> {minute} </p>
-                  <img className="down" src={downBtn} onClick={downMinute} alt="down arrow minutes" />
+                  <img className="up" src={upBtn} onClick={upFromMinute} alt="up arrow minutes" />
+                  <p> {FromMinute} </p>
+                  <img className="down" src={downBtn} onClick={downFromMinute} alt="down arrow minutes" />
                 </div>
               </div>
 
               <div className='to'>
                 <h3 className='title'> To </h3>
                 <div className="hour">
-                  <img className="up" src={upBtn} onClick={upHour} alt="up arrow hour" />
-                  <p> {hour} </p>
-                  <img className="down" src={downBtn} onClick={downHour} alt="down arrow hour" />
+                  <img className="up" src={upBtn} onClick={upToHour} alt="up arrow hour" />
+                  <p> {ToHour} </p>
+                  <img className="down" src={downBtn} onClick={downToHour} alt="down arrow hour" />
                 </div>
 
                 <img className="dotdot" src={dotdot} alt="dotdot"/>
 
                 <div className="minutes">
-                  <img className="up" src={upBtn} onClick={upMinute} alt="up arrow minutes" />
-                  <p> {minute} </p>
-                  <img className="down" src={downBtn} onClick={downMinute} alt="down arrow minutes" />
+                  <img className="up" src={upBtn} onClick={upToMinute} alt="up arrow minutes" />
+                  <p> {ToMinute} </p>
+                  <img className="down" src={downBtn} onClick={downToMinute} alt="down arrow minutes" />
                 </div>
               </div>
 
             </div>
 
-            <button className='create-button' onClick={CreateSchedule}> Create </button>
+            <button className='create-button' > Create </button>
           </div>
         </div>
       </div>
 
     <div id="schedule-rows" className="schedule-rows">
-        {schedules}
     </div>
   </div>
   )
