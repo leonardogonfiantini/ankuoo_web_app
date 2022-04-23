@@ -120,16 +120,29 @@ function Schedule() {
     }
   }
 
+  function activeDay(e) {
+    if (!e.target.classList.contains('activeDay'))
+      e.target.classList.add('activeDay')
+    else
+      e.target.classList.remove('activeDay')
+  }
+
 
   const [schedules, setSchedules] = useState([])
   const [id, setId] = useState(0)
 
-  /*function CreateSchedule() {
+  function CreateSchedule() {
+
     setSchedules(
-      [...schedules, <ScheduleRow key={id} id={id} time={hour + ':' + minute} /> ]
+      [...schedules, <ScheduleRow 
+                        key={id} 
+                        id={id} 
+                        from={FromHour + ':' + FromMinute} 
+                        to={ToHour + ':' + ToMinute}
+                      /> ]
     )
     setId(id + 1)
-  }*/
+  }
 
   return (
     <div className='schedule'>
@@ -175,16 +188,33 @@ function Schedule() {
                   <p> {ToMinute} </p>
                   <img className="down" src={downBtn} onClick={downToMinute} alt="down arrow minutes" />
                 </div>
+
+
+                <div className="days">
+
+                    <h2> Days </h2>
+                    
+                    <button onClick={activeDay}> Mon </button>
+                    <button onClick={activeDay}> Tue </button>
+                    <button onClick={activeDay}> Wed </button>
+                    <button onClick={activeDay}> Thu </button>
+                    <button onClick={activeDay}> Fri </button>
+                    <button onClick={activeDay}> Sat </button>
+                    <button onClick={activeDay}> Sun </button>
+
+                </div>
+
               </div>
 
             </div>
 
-            <button className='create-button' > Create </button>
+            <button className='create-button'onClick={CreateSchedule} > Create </button>
           </div>
         </div>
       </div>
 
     <div id="schedule-rows" className="schedule-rows">
+      {schedules}
     </div>
   </div>
   )

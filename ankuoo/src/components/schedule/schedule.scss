@@ -189,6 +189,43 @@ $main-color: hsl(295, 89%, 22%);
                     }
                 }
 
+                
+                .days {
+                    position: absolute;
+                    top: 14rem;
+                    left: 0.1rem;
+
+                    width:  90%;
+                    height: 16rem;
+
+
+                    h2 {
+                        color: $main-color;
+                        font-size: 1.8em;
+                    }
+
+                    button {
+                        width: 4rem;
+                        height: 4rem;
+
+                        margin-left: 1rem;
+                        margin-top: 1rem;
+                        border-radius: 100%;
+                        background-color: white;
+                        border: 1px solid $main-color;
+                        color: $main-color;
+                        
+                        transition: 700ms;
+                        animation: ease-in-out;
+
+                    }
+
+                    .activeDay {
+                        background-color: $main-color;
+                        color: white;
+                    }
+
+                }
 
             }
 

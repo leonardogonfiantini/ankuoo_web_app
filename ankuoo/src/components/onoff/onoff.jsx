@@ -25,29 +25,30 @@ function OnOff() {
 
   const Ref = useRef(null);
 
-  const [timer, setTimer] = useState('00:00:00')
+  const [timer_btn, setTimer] = useState('00:00:00')
 
   function startTimer() {  
 
     var oldtime = new Date().getTime();
 
-    const id = setInterval(() => {
+    const idtimer = setInterval(() => {
       var now = new Date().getTime();
     
       var distance = now - oldtime;
     
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      var timer_hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var timer_minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var timer_seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
       setTimer(
-        (hours <= 9 ? '0' + hours : hours) + ':' + 
-        (minutes <= 9 ? '0' + minutes : minutes) + ':' + 
-        (seconds <= 9 ? '0' + seconds : seconds)
+        (timer_hours <= 9 ? '0' + timer_hours : timer_hours) + ':' + 
+        (timer_minutes <= 9 ? '0' + timer_minutes :timer_minutes) + ':' + 
+        (timer_seconds <= 9 ? '0' + timer_seconds : timer_seconds)
       )
+
     }, 1000)
 
-    Ref.current = id
+    Ref.current = idtimer
 
   }
   
@@ -57,9 +58,10 @@ function OnOff() {
   }
 
   useEffect(() => {
-      if (timer !== "00:00:00")
+      if (timer_btn !== "00:00:00")
         clearTimer()
-  });
+        
+  }, []);
 
   var button_status = button_off;
   if (status === 1) button_status = button_on
@@ -67,7 +69,7 @@ function OnOff() {
   return (
     <div className='onoff'>
       <img src={button_status} id='button-img' onClick={buttonSetStatus} alt="onoff button" /> 
-      <p id="timer-text"> {timer} </p> 
+      <p id="timer-text"> {timer_btn} </p> 
     </div>
   )
 }

@@ -58,11 +58,11 @@ function Home() {
         </div>  
 
 
-        <div id='schedules' className='schedules'> <Schedule /> </div>
-        <div id='stats' className='stats'> <Stats /> </div>
-        <div id='timers' className='timers'> <Timer /> </div>  
+      <div id='schedules' className='schedules'> <Schedule /> </div>
+      <div id='stats' className='stats'> <Stats /> </div>
+      <div id='timers' className='timers'> <Timer /> </div>  
 
-        <div id='widgets' className="widgets"> </div>
+      <div id='widgets' className="widgets"> </div>
     </div>
   )
 

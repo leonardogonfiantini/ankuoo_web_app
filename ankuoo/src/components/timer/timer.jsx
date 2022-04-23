@@ -66,7 +66,11 @@ function Timer() {
 
   function CreateTimer() {
     setTimers(
-      [...timers, <TimerRow key={id} id={id} time={hour + ':' + minute} /> ]
+      [...timers, <TimerRow 
+                    key={id} 
+                    id={id} 
+                    time={hour + ':' + minute} 
+                  /> ]
     )
     setId(id + 1)
   }
