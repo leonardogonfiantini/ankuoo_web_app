@@ -1,0 +1,259 @@
+$main-color: hsl(295, 89%, 22%);
+
+.schedule {
+    
+    width: 100%;
+    height: 100%;
+
+    @media screen and (min-width: 900px) {
+        position: relative;
+
+        width: 90%;
+        height: 90%;
+    
+        margin: auto;
+    
+        background-color: white;
+    
+        border-radius: 1rem;
+
+        box-shadow: 4px 4px 5px black;
+        border: 2px solid $main-color;
+
+        img {
+            background-color: white;
+        }
+
+        p {
+            color: black;
+            top: -0.7rem;
+            z-index: 2;
+        }
+
+    }
+
+
+    .schedule-create {
+
+        position: relative;
+        margin-top: 0.5rem;
+
+        img {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin-left: 1rem;
+            
+            border-radius: 50%;
+        }
+
+        @keyframes modal-schedule-animation {
+            0% {top: -100rem;}
+            80% {top: 70%;}
+            100% {top: 50%;}
+        }
+
+        @media screen and (min-width: 1000px) {
+            @keyframes modal-schedule-animation {
+                0% {top: -100rem;}
+                80% {top: -200%;}
+                100% {top: -220%;}
+            }
+        }
+
+        .modal-schedule {
+            position: absolute;
+            display: none;
+
+            top: 50%;
+            left: 50%;
+
+
+            @media screen and (min-width: 1000px) {
+                top: -220%;
+            }
+
+            transform: translate(-50%, -50%);
+
+            width: 98%;
+            height: 40rem;
+
+            
+            transition: ease-in;
+            overflow: hidden;
+
+            background-color: white;
+            border: 2px solid $main-color;
+            border-radius: 1rem;
+            z-index: 4;
+
+
+            h2 {
+                position: relative;
+                margin-top: 1.5rem;
+                margin-left: 2rem;
+
+                font-size: 2em;
+                color: $main-color;
+            }
+
+            .close-modal {
+                position: absolute;
+
+                width: 3rem;
+                height: 3rem;
+
+                right: 1rem;
+                top: 1rem;
+                
+            }
+
+            .create-button {
+                position: absolute;
+
+                bottom: 1rem;
+                right: 1rem;
+
+                width: 90%;
+                height: 4rem;
+
+                background-color: $main-color;
+                
+                font-size: 1.2em;
+                color: white;
+
+                border: 0;
+                border-radius: 0.2rem;
+        
+            }
+
+            .set-schedule {
+                position: absolute;
+
+                width: 100%;
+                height: 70%;
+
+                .title {
+                    position: absolute;
+
+                    top: 2rem;
+                    left: 3.5rem;
+
+                    font-size: 1.5em;
+
+                    color: $main-color
+                }
+
+                .hour, .minutes {
+                    position: absolute;
+
+                    margin-top: 4rem;
+
+                    .up, .down {
+                        width: 3rem;
+                        height: 3rem;
+                    }
+
+                    p {
+                        font-size: 2em;
+                        margin-left: 0.9rem;
+                    }
+
+                    .up, .down {
+                        margin-left: 0.5rem;
+                    }
+                }
+
+                .minutes {
+                    margin-left: 6rem;
+                }
+
+                .dotdot {
+                    width: 2rem;
+                    height: 2rem;
+
+                    position: absolute;
+                    top: 7.5rem;
+
+                    left: 3.1rem;
+                }
+
+                .to {
+                    margin-left: 12.5rem;
+
+                    .dotdot {
+                        left: 15.5rem;
+                    }
+
+                    .title {
+                        left: 17rem;
+                    }
+                }
+
+                
+                .days {
+                    position: absolute;
+                    top: 14rem;
+                    left: 0.1rem;
+
+                    width:  90%;
+                    height: 16rem;
+
+
+                    h2 {
+                        color: $main-color;
+                        font-size: 1.8em;
+                    }
+
+                    button {
+                        width: 4rem;
+                        height: 4rem;
+
+                        margin-left: 1rem;
+                        margin-top: 1rem;
+                        border-radius: 100%;
+                        background-color: white;
+                        border: 1px solid $main-color;
+                        color: $main-color;
+                        
+                        transition: 700ms;
+                        animation: ease-in-out;
+
+                    }
+
+                    .activeDay {
+                        background-color: $main-color;
+                        color: white;
+                    }
+
+                }
+
+            }
+
+        }
+
+        .active {
+            display: block;
+            animation: modal-schedule-animation;
+            animation-duration: 1s;
+        }
+
+    }
+
+    .schedule-rows {
+
+        position: relative;
+
+        width: 95%;
+        height:  22rem;
+
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+
+        overflow-y: auto;
+
+        @media screen and (min-width: 1000px) {
+            height: 8rem;
+        }
+
+    }
+}
