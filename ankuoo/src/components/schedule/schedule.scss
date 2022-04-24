@@ -55,8 +55,8 @@ $main-color: hsl(295, 89%, 22%);
         @media screen and (min-width: 1000px) {
             @keyframes modal-schedule-animation {
                 0% {top: -100rem;}
-                80% {top: -60%;}
-                100% {top: -40%;}
+                80% {top: -200%;}
+                100% {top: -220%;}
             }
         }
 
@@ -69,7 +69,7 @@ $main-color: hsl(295, 89%, 22%);
 
 
             @media screen and (min-width: 1000px) {
-                top: -40%;
+                top: -220%;
             }
 
             transform: translate(-50%, -50%);

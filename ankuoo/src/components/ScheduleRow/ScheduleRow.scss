@@ -24,7 +24,33 @@ $main-color: hsl(295, 89%, 22%);
         margin-left: 1rem;
     }
 
+    .calendar-info {
+        display: none;
+        background-color: black;
+        color: white;
+        font-size: 0.7em;
 
+        position: absolute;
+        margin-left: 10rem;
+        margin-top: -1.09rem;
+
+        border-radius: 0.5rem;
+
+        z-index: 3;
+
+        padding: 0 4px 0 4px;
+
+        width: max-content;
+        height: 1rem;
+    }
+
+    @media screen and (min-width: 900px) {
+        .calendar-info {
+            position: relative;
+            margin-top: 0.8rem;
+            margin-left: 1rem;
+        }
+    }
 
     .switch {
         position: relative;

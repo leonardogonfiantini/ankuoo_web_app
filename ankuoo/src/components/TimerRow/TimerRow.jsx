@@ -11,7 +11,6 @@ function TimerRow({id, time}) {
     obj.remove()
   }
 
-
   return (
     <div id={'id-timer'+id} className='TimerRow'>
 

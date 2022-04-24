@@ -133,12 +133,15 @@ function Schedule() {
 
   function CreateSchedule() {
 
+    var days = document.getElementsByClassName('activeDay')
+
     setSchedules(
       [...schedules, <ScheduleRow 
                         key={id} 
                         id={id} 
                         from={FromHour + ':' + FromMinute} 
                         to={ToHour + ':' + ToMinute}
+                        days={days}
                       /> ]
     )
     setId(id + 1)
@@ -194,13 +197,13 @@ function Schedule() {
 
                     <h2> Days </h2>
                     
-                    <button onClick={activeDay}> Mon </button>
-                    <button onClick={activeDay}> Tue </button>
-                    <button onClick={activeDay}> Wed </button>
-                    <button onClick={activeDay}> Thu </button>
-                    <button onClick={activeDay}> Fri </button>
-                    <button onClick={activeDay}> Sat </button>
-                    <button onClick={activeDay}> Sun </button>
+                    <button id="mon" onClick={activeDay}> Mon </button>
+                    <button id="tue" onClick={activeDay}> Tue </button>
+                    <button id="wed" onClick={activeDay}> Wed </button>
+                    <button id="thu" onClick={activeDay}> Thu </button>
+                    <button id="fri" onClick={activeDay}> Fri </button>
+                    <button id="sat" onClick={activeDay}> Sat </button>
+                    <button id="sun" onClick={activeDay}> Sun </button>
 
                 </div>
 
