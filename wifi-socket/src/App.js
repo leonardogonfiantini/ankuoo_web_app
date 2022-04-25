@@ -1,13 +1,11 @@
 import React from 'react'
 import Home from './views/home/home';
 
-
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
-
 
 
 function App() {
