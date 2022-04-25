@@ -21,6 +21,8 @@ mongoose
     .then(() => console.log("MongoDb connection succesfull"))
     .catch((err) => console.log(err))
 
+app.use(express.json())
+
 app.use("/api/timer", timerAPI)
 app.use("/api/onoff", onoffAPI)
 app.use("/api/schedule", scheduleAPI)
