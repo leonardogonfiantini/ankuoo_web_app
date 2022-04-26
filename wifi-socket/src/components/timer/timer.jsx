@@ -75,38 +75,45 @@ function Timer() {
     setId(id + 1)
   }
 
+  const [timerData, setTimerDatas] = useState({})
+  const [ready, isready] = useState(false)
 
   useEffect(() => {
+
+    const fetchData = async() => {
       
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       }
     
-      var datas = []
+      const response = await fetch("/api/timer/getAll", requestOptions)
+      const json = await response.json()
 
-      fetch("/api/timer/getAll", requestOptions)
-      .then(res => res.json())
-      .then(data => data.forEach(e => {
-        datas.push(e)
-      }))
+      setTimerDatas(json)
+      isready(true)
+    }
 
+    fetchData()
+
+  }, [])
+
+  useEffect(() => {
+
+    if (!ready) return
+    else {
       let copy = []
-      let idp = id;
-      
-      for(let i = 0; i < datas.length; i++) {
-        copy.push(<TimerRow key={idp} id={idp} time={datas[i].timer} />)
-        idp++
+      let idp = id
+      for (let i = 0; i < timerData.length; i++) {
+        copy = [...copy, <TimerRow key={idp} id={idp} time={timerData[i].timer} />]
+        idp++;
       }
 
-      console.log(copy)
-
       setId(idp)
+      setTimers(...timers, copy)
 
-      setTimers(
-        [...timers, ...copy]
-      )
-  }, [])
+    }
+  }, [ready])
 
   return (
     <div className='timer'>
