@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 
 import './home.scss'
 
@@ -43,19 +43,9 @@ function Home() {
       document.addEventListener('DOMContentLoaded', function(){ widgetShow('timers')}, false);
   }
 
-
-  const [data, setData] = useState({})
-
-  useEffect(() => {
-    fetch("/api/timer/prova")
-    .then(res => res.json())
-    .then(data => setData(data))
-  }, [])
-
   return (
     <div className='home'>
         <div className='item1 onoff' > <OnOff /> </div>   
-        {data.express}
 
         <div id='item2' className='item2'>
           <div className='navbar'> 

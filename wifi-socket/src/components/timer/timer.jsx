@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, {useState, useEffect, useCallback} from 'react'
 
 import './timer.scss'
   
@@ -75,11 +75,43 @@ function Timer() {
     setId(id + 1)
   }
 
+
+  useEffect(() => {
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      }
+    
+      var datas = []
+
+      fetch("/api/timer/getAll", requestOptions)
+      .then(res => res.json())
+      .then(data => data.forEach(e => {
+        datas.push(e)
+      }))
+
+      let copy = []
+      let idp = id;
+      
+      for(let i = 0; i < datas.length; i++) {
+        copy.push(<TimerRow key={idp} id={idp} time={datas[i].timer} />)
+        idp++
+      }
+
+      console.log(copy)
+
+      setId(idp)
+
+      setTimers(
+        [...timers, ...copy]
+      )
+  }, [])
+
   return (
     <div className='timer'>
       <div className="timer-create">
         <img src={plusBtn} onClick={openModalTimer} alt="open modal" />
-
         <div id="modal-timer" className="modal">
           <div className="modal-content">
             <h2> Create timer </h2>
