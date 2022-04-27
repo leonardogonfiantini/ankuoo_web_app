@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import './schedule.scss'
 
@@ -134,18 +134,93 @@ function Schedule() {
   function CreateSchedule() {
 
     var days = document.getElementsByClassName('activeDay')
+    var mon = '0'; var tue = '0'; var wed = '0'; var thu = '0'; var fri = '0'; var sat = '0'; var sun = '0';
+
+    for (let i = 0; i < days.length; i++) {
+      if (days[i].id === 'mon') mon = '1'
+      if (days[i].id === 'tue') tue = '1'
+      if (days[i].id === 'wed') wed = '1'
+      if (days[i].id === 'thu') thu = '1'
+      if (days[i].id === 'fri') fri = '1'
+      if (days[i].id === 'sat') sat = '1'
+      if (days[i].id === 'sun') sun = '1'
+
+    }
 
     setSchedules(
       [...schedules, <ScheduleRow 
-                        key={id} 
-                        id={id} 
-                        from={FromHour + ':' + FromMinute} 
-                        to={ToHour + ':' + ToMinute}
-                        days={days}
+                        key={id} id={id} 
+                        from={FromHour + ':' + FromMinute} to={ToHour + ':' + ToMinute}
+                        mon={mon} tue={tue} wed={wed}
+                        thu={thu} fri={fri} sat={sat} sun={sun}
+                        status={'0'}
                       /> ]
     )
+
     setId(id + 1)
+
+    const fetchCreate = async() => {
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ from:FromHour + ':' + FromMinute, to:ToHour + ':' + ToMinute,
+                               mon:mon, tue:tue, wed:wed,
+                               thu:thu, fri:fri, sat:sat, sun:sun,
+                               status:'0'})
+      }
+    
+      const response = await fetch("/api/schedule/insert", requestOptions)
+      console.log(response)
+    }
+
+    fetchCreate()
   }
+
+
+  const [schedulesDatas, setSchedulesDatas] = useState({})
+  const [ready, isready] = useState(false)
+
+  useEffect(() => {
+
+    const fetchData = async() => {
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      }
+    
+      const response = await fetch("/api/schedule/getAll", requestOptions)
+      const json = await response.json()
+
+      setSchedulesDatas(json)
+      isready(true)
+    }
+
+    fetchData()
+
+  }, [])
+
+  useEffect(() => {
+
+    if (!ready) return
+    else {
+      let copy = []
+      let idp = id
+      for (let i = 0; i < schedulesDatas.length; i++) {
+        copy = [...copy, <ScheduleRow key={idp} id={idp}  
+                                      from={schedulesDatas[i].from} to={schedulesDatas[i].to}
+                                      mon={schedulesDatas[i].mon} tue={schedulesDatas[i].tue} wed={schedulesDatas[i].wed}
+                                      thu={schedulesDatas[i].thu} fri={schedulesDatas[i].fri} sat={schedulesDatas[i].sat} sun={schedulesDatas[i].sun}
+                                      status={schedulesDatas[i].status} />]
+        idp++;
+      }
+
+      setId(idp)
+      setSchedules(...schedules, copy)
+
+    }
+  }, [ready])
 
   return (
     <div className='schedule'>

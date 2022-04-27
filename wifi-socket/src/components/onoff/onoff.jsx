@@ -6,20 +6,40 @@ import button_off from './power-button-off.png'
 
 function OnOff() {
   
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState('0');
 
   function buttonSetStatus(e) {
 
-    if (status === 0) {
+    console.log(status)
+
+    const fetchUpdate = async() => {
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({status: status === '0' ? '1' : '0'})
+      }
+    
+      const response = await fetch("/api/onoff/update", requestOptions)
+      const json = await response.json()
+
+      setOnOffData(json)
+      isready(true)
+    }
+
+    fetchUpdate()
+
+    if (status === '0') {
       e.target.setAttribute('src', button_off)
-      setStatus(status + 1);
+      setStatus('1');
       startTimer();
     }
     else {
       e.target.setAttribute('src', button_on)
-      setStatus(status - 1);
+      setStatus('0');
       clearTimer()
     }
+
   }
 
 
@@ -42,7 +62,7 @@ function OnOff() {
     
       setTimer(
         (timer_hours <= 9 ? '0' + timer_hours : timer_hours) + ':' + 
-        (timer_minutes <= 9 ? '0' + timer_minutes :timer_minutes) + ':' + 
+        (timer_minutes <= 9 ? '0' + timer_minutes : timer_minutes) + ':' + 
         (timer_seconds <= 9 ? '0' + timer_seconds : timer_seconds)
       )
 
@@ -63,8 +83,40 @@ function OnOff() {
         
   }, []);
 
+
+  const [onoffData, setOnOffData] = useState({})
+  const [ready, isready] = useState(false)
+
+  useEffect(() => {
+
+    const fetchData = async() => {
+      
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      }
+    
+      const response = await fetch("/api/onoff/get", requestOptions)
+      const json = await response.json()
+
+      setOnOffData(json)
+      isready(true)
+    }
+
+    fetchData()
+
+  }, [])
+
+  useEffect(() => {
+      if (!ready) return
+      else {
+        setStatus(onoffData[0].status)
+      }
+  }, [ready])
+
+
   var button_status = button_off;
-  if (status === 1) button_status = button_on
+  if (status === '1') button_status = button_on
 
   return (
     <div className='onoff'>

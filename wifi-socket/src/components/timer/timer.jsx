@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import './timer.scss'
   
@@ -70,9 +70,24 @@ function Timer() {
                     key={id} 
                     id={id} 
                     time={hour + ':' + minute} 
+                    status={'0'}
                   /> ]
     )
     setId(id + 1)
+
+    const fetchCreate = async() => {
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({timer: hour + ':' + minute, status: '0'})
+      }
+    
+      const response = await fetch("/api/timer/insert", requestOptions)
+      console.log(response)
+    }
+
+    fetchCreate()
   }
 
   const [timerData, setTimerDatas] = useState({})
@@ -105,7 +120,7 @@ function Timer() {
       let copy = []
       let idp = id
       for (let i = 0; i < timerData.length; i++) {
-        copy = [...copy, <TimerRow key={idp} id={idp} time={timerData[i].timer} />]
+        copy = [...copy, <TimerRow key={idp} id={idp} time={timerData[i].timer} status={timerData[i].status} />]
         idp++;
       }
 
