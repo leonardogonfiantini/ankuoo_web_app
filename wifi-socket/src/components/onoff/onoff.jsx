@@ -10,14 +10,15 @@ function OnOff() {
 
   function buttonSetStatus(e) {
 
-    console.log(status)
+    var time = new Date().getTime()
 
     const fetchUpdate = async() => {
       
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({status: status === '0' ? '1' : '0'})
+        body: JSON.stringify({status: status === '0' ? '1' : '0',
+                              time: time})
       }
     
       const response = await fetch("/api/onoff/update", requestOptions)
@@ -32,7 +33,7 @@ function OnOff() {
     if (status === '0') {
       e.target.setAttribute('src', button_off)
       setStatus('1');
-      startTimer();
+      startTimer(time)
     }
     else {
       e.target.setAttribute('src', button_on)
@@ -47,9 +48,7 @@ function OnOff() {
 
   const [timer_btn, setTimer] = useState('00:00:00')
 
-  function startTimer() {  
-
-    var oldtime = new Date().getTime();
+  function startTimer(oldtime) {  
 
     const idtimer = setInterval(() => {
       var now = new Date().getTime();
@@ -77,11 +76,6 @@ function OnOff() {
     clearInterval(Ref.current)
   }
 
-  useEffect(() => {
-      if (timer_btn !== "00:00:00")
-        clearTimer()
-        
-  }, []);
 
 
   const [onoffData, setOnOffData] = useState({})
@@ -111,6 +105,9 @@ function OnOff() {
       if (!ready) return
       else {
         setStatus(onoffData[0].status)
+        var time = new Date(onoffData[0].time)
+        console.log(time)
+        if (onoffData[0].status === '1') startTimer(time);
       }
   }, [ready])
 

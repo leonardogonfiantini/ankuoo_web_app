@@ -6,9 +6,11 @@ router.post("/insert", async (req, res) => {
     console.log("Insert onoff request: ")
 
     const status = req.body.status
+    const time = req.body.time
 
     const newOnOff = new OnOff ({
-        status: status
+        status: status,
+        time: time
     });
 
     try {
@@ -41,9 +43,10 @@ router.post("/update", async (req, res) => {
     console.log("Update OnOff request:")
 
     const status = req.body.status
+    const time = req.body.time
 
     try {
-        const updateOnOff = await OnOff.updateOne({}, {status})
+        const updateOnOff = await OnOff.updateOne({}, {status: status, time: time})
         res.status(200).json(updateOnOff)
         console.log("Request succesfull")
     } catch (err) {
