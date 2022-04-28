@@ -34,7 +34,7 @@ while (1):
 
 
         #onoffs
-        col = db['OnOffs']
+        col = db['onoffs']
         x = col.find_one()
         if (int(x['status']) > 0):
             flag = 1
@@ -42,10 +42,10 @@ while (1):
         print('onoff flag: ', flag)
 
         #timers
-        col = db['Timers']
+        col = db['timers']
         
         for x in col.find({ "status": { "$ne": "0"} } ):
-            timer = x['time']
+            timer = x['timer']
             time_expect = ((int(timer[0])*10+int(timer[1]))*60*60)+((int(timer[3])*10+int(timer[4]))*60)
 
             to_timer = time_expect + int(x['status'])
@@ -61,7 +61,7 @@ while (1):
 
         #schedules
         current_time = time.localtime(time.time())
-        col = db['Schedules']
+        col = db['schedules']
 
         for x in col.find({ "status": { "$ne": "0"} } ):
             wday = calendar.day_name[current_time.tm_wday][:3].lower() 

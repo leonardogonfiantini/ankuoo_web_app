@@ -52,7 +52,7 @@ function TimerRow({id, time, status}) {
     <div id={'id-timer'+id} className='TimerRow'>
 
         <label className="switch">
-        <input type="checkbox" checked={checked === '1' ? true : false} onClick={isChecked} onChange={e => {}} />
+        <input type="checkbox" checked={checked != '0' ? true : false} onClick={isChecked} onChange={e => {}} />
         <span className="slider round"/>
         </label>
 

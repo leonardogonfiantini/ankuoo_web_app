@@ -42,7 +42,7 @@ router.post("/update", async (req, res) => {
     console.log("Update timer request: ")
 
     const timer = req.body.timer
-    const status = req.body.status
+    const status = req.body.status === '1' ? Math.floor(Date.now()/1000) : '0'
 
     try {
         const updateTimer = await Timer.updateOne({timer: timer}, {status: status})
