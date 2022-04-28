@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-wifi-socket/node_modules
+/wifi-socket/node_modules
 /.pnp
 .pnp.js
 
