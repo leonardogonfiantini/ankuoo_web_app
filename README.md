@@ -22,6 +22,7 @@ python3 socket-server.py
 
 ### App look
 
-
+![Look1](Look1.png)
+![Look2](Look2.png)
 
 
