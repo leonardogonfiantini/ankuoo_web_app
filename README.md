@@ -1,26 +1,22 @@
 # Wifi socket webapp
 
-This webapp permit you to control your wifi smart socket in a easy way like the original constructor apps.
+This web application allows you to easily control your WiFi smart socket, just like the original manufacturer's app. However, there are a few prerequisites that you need to fulfill before you can use this app. Firstly, you need to flash your device with the firmware found at this link: https://drive.google.com/drive/folders/1HWl-QiYM2u8lW9TAv1M6Kr9DPkj1_wRG?usp=sharing. Secondly, you can find the necessary code in this GitHub repository: https://github.com/ljalves/hfeasy. Additionally, you need to create a MongoDB Atlas cluster, as the database is necessary for the server script to send requests from the client to the device. 
+Finally, you should create a .env file inside wifi-socket/src where you can specify the MongoDB URL and the server port. Once you have fulfilled these prerequisites, you can proceed with the build/installation/setup process.
 
-### Prerequisites:
-- Your device have to be flashed with this firmware: <br/> https://drive.google.com/drive/folders/1HWl-QiYM2u8lW9TAv1M6Kr9DPkj1_wRG?usp=sharing <br> You can find the code in this repository: https://github.com/ljalves/hfeasy
-- Create a mongodb atlas cluster, the database is necessary for the server script to send the request from client to device
-- Create a .env file inside wifi-socket/src, where you will write the mongodb url and the port for the server
+To do this, simply clone this repository, and once the installation is complete, navigate to /wifi-socket, install the dependencies, and build the app using the following commands: 
 
-### Build/install/setup:
-Clone this repository, after the installation is finished, move on /wifi socket, install dependecies and build the app:
 ```
 npm install
 npm run-script build
 ```
-Setup the environment, i suggest you to use screen:
+
+To set up the environment, we suggest using a screen, and running :
+
 ```
 npm start
 node server.js
 python3 socket-server.py
 ```
-
-### App look
 
 ![Look1](Look1.png)
 ![Look2](Look2.png)
